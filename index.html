@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Memory Game · Quem é quem?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">MEMORY<br>GAME</span>
+    <span class="brand-title">Quem é quem?</span>
+  </div>
+  <div class="stats" aria-live="polite">
+    <div class="stat"><span class="stat-value" id="stat-pairs">0/0</span><span class="stat-label">pares</span></div>
+    <div class="stat"><span class="stat-value" id="stat-tries">0</span><span class="stat-label">tentativas</span></div>
+    <div class="stat"><span class="stat-value" id="stat-time">00:00</span><span class="stat-label">tempo</span></div>
+  </div>
+  <div class="controls">
+    <div class="segmented" role="group" aria-label="Modo de jogo">
+      <button type="button" class="seg" data-mode="classico" aria-pressed="true">Clássico</button>
+      <button type="button" class="seg" data-mode="aberto" aria-pressed="false">Cartas abertas</button>
+    </div>
+    <button type="button" class="btn ghost" id="btn-rules">Como jogar</button>
+    <button type="button" class="btn ghost" id="btn-shuffle">Embaralhar</button>
+    <button type="button" class="btn ghost icon" id="btn-fullscreen" aria-label="Tela cheia">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="hint" id="hint" role="status" aria-live="polite"></div>
+
+<main class="board-wrap" id="board-wrap">
+  <div class="board" id="board"></div>
+</main>
+
+<!-- Como jogar -->
+<div class="overlay" id="intro" hidden>
+  <div class="panel intro">
+    <span class="eyebrow">MEMORY GAME · DINÂMICA DE TIME</span>
+    <h1>Quem é quem?</h1>
+    <p class="lead">Cada pessoa do time tem um par de cartas: a <strong>carta da pessoa</strong>, com foto e nome, e a <strong>carta do perfil profissional</strong>, com competências, repertório, impacto e traços.</p>
+    <ol class="rules">
+      <li><span>1</span>Vire duas cartas por vez e descubram, em grupo, qual perfil pertence a qual pessoa.</li>
+      <li><span>2</span>Encontrou o par? A própria pessoa apresenta o seu perfil, complementando e contextualizando o que está na carta.</li>
+      <li><span>3</span>Não é par? Conversem sobre o porquê e virem as cartas de volta.</li>
+    </ol>
+    <p class="note">Quem apresenta o perfil é sempre a própria pessoa. A carta é um ponto de partida, não uma definição.</p>
+    <div class="intro-modes">
+      <button type="button" class="btn primary" data-start="classico">Começar no modo clássico</button>
+      <button type="button" class="btn ghost" data-start="aberto">Começar com cartas abertas</button>
+    </div>
+    <p class="mode-help"><strong>Clássico:</strong> cartas viradas para baixo, vale a memória. <strong>Cartas abertas:</strong> tudo à mostra, vale a dedução.</p>
+  </div>
+</div>
+
+<!-- Par encontrado -->
+<div class="overlay" id="match" hidden>
+  <div class="panel match" role="dialog" aria-modal="true" aria-labelledby="match-title">
+    <div class="match-head">
+      <span class="eyebrow">PAR ENCONTRADO</span>
+      <h2 id="match-title">Nome</h2>
+      <p id="match-sub">Agora é com você: apresente o seu perfil para o time.</p>
+    </div>
+    <div class="match-cards" id="match-cards"></div>
+    <div class="match-actions">
+      <button type="button" class="btn primary" id="btn-match-done">Apresentação concluída</button>
+    </div>
+  </div>
+</div>
+
+<!-- Zoom -->
+<div class="overlay" id="zoom" hidden>
+  <div class="zoom-box" role="dialog" aria-modal="true" aria-label="Carta ampliada">
+    <div class="zoom-card" id="zoom-card"></div>
+    <button type="button" class="btn ghost" id="btn-zoom-close">Fechar</button>
+  </div>
+</div>
+
+<!-- Fim -->
+<div class="overlay" id="end" hidden>
+  <div class="panel intro">
+    <span class="eyebrow">FIM DE JOGO</span>
+    <h1>Todos os pares encontrados.</h1>
+    <p class="lead" id="end-summary"></p>
+    <div class="intro-modes">
+      <button type="button" class="btn primary" id="btn-again">Jogar de novo</button>
+      <button type="button" class="btn ghost" id="btn-gallery">Ver todas as cartas</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/cards.js"></script>
+<script src="assets/js/game.js"></script>
+</body>
+</html>
