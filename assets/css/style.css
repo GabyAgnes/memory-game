@@ -53,7 +53,7 @@ button{font:inherit;color:inherit}
 .btn.ghost{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.12);color:var(--text)}
 .btn.ghost:hover{background:rgba(255,255,255,.09)}
 .btn.icon{padding:10px 12px}
-.btn:focus-visible,.seg:focus-visible,.card-hit:focus-visible,.zoom-btn:focus-visible{outline:2px solid var(--violet);outline-offset:3px}
+.btn:focus-visible,.seg:focus-visible,.card-hit:focus-visible{outline:2px solid var(--violet);outline-offset:3px}
 
 .hint{
   position:fixed;left:50%;bottom:22px;transform:translate(-50%,20px);
@@ -71,8 +71,8 @@ button{font:inherit;color:inherit}
 
 .card{
   position:relative;
-  width:calc(690px * var(--s));height:calc(960px * var(--s));
-  perspective:1400px;
+  width:calc(1536px * var(--s));height:calc(1024px * var(--s));
+  perspective:1600px;
 }
 .card-inner{
   position:absolute;inset:0;
@@ -83,57 +83,61 @@ button{font:inherit;color:inherit}
 .card-back,.card-face{
   position:absolute;inset:0;
   backface-visibility:hidden;-webkit-backface-visibility:hidden;
-  border-radius:calc(34px * var(--s));overflow:hidden;
+  border-radius:calc(40px * var(--s));overflow:hidden;
 }
-.card-face{transform:rotateY(180deg)}
-.card-hit{position:absolute;inset:0;z-index:2;border:0;background:none;cursor:pointer;border-radius:calc(34px * var(--s))}
-.card.is-matched .card-hit{cursor:zoom-in}
+.card-face{transform:rotateY(180deg);background:#E8E7EB}
+.card-hit{position:absolute;inset:0;z-index:2;border:0;background:none;cursor:pointer;border-radius:calc(40px * var(--s))}
+.board.is-locked .card-hit{cursor:default}
 
 /* Verso (carta virada para baixo) */
 .card-back{
   container-type:inline-size;
   background:
-    radial-gradient(120% 80% at 50% 30%, rgba(109,40,217,.45), transparent 60%),
+    radial-gradient(70% 90% at 30% 40%, rgba(109,40,217,.45), transparent 60%),
     linear-gradient(160deg,#1A1726,#0F0E14 70%);
   border:1px solid rgba(167,139,250,.35);
   box-shadow:0 10px 24px rgba(0,0,0,.35);
 }
 .card-back::before{
-  content:"";position:absolute;inset:5cqw;border-radius:4cqw;
+  content:"";position:absolute;inset:3cqw;border-radius:2.4cqw;
   border:1px solid rgba(167,139,250,.18);
 }
-.card-back svg{position:absolute;left:24cqw;top:30%;width:52cqw;height:52cqw}
+.card-back svg{position:absolute;left:12cqw;top:50%;transform:translateY(-50%);width:28cqw;height:28cqw}
 .card-back .back-label{
-  position:absolute;left:0;right:0;top:64%;
-  font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:6.2cqw;letter-spacing:2.4cqw;
-  color:#E4E1EC;text-align:center;line-height:1.5;padding-left:2.4cqw;
+  position:absolute;left:48cqw;top:50%;transform:translateY(-50%);
+  font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:4.2cqw;letter-spacing:1.6cqw;
+  color:#E4E1EC;line-height:1.5;
 }
-.card-back .back-q{position:absolute;left:0;right:0;bottom:10cqw;text-align:center;font-family:'Space Grotesk',sans-serif;font-size:5cqw;letter-spacing:1.2cqw;color:var(--violet)}
-.card-back .back-top{position:absolute;left:10cqw;top:10cqw;font-family:'Space Grotesk',sans-serif;font-size:4.6cqw;letter-spacing:1.2cqw;color:#CFCBDB}
+.card-back .back-q{display:block;margin-top:2cqw;font-size:3cqw;letter-spacing:.9cqw;color:var(--violet)}
 .card:hover:not(.is-up) .card-inner{transform:translateY(-3px)}
 
-/* Frente (conteúdo da carta) */
-.stage{width:690px;height:960px;transform:scale(var(--s));transform-origin:0 0;pointer-events:none}
-.stage > div{box-shadow:none !important}
-.stage img.card-img{width:690px;height:960px;object-fit:contain;display:block}
+/* Frente: o board com as duas metades */
+.stage{width:1536px;height:1024px;transform:scale(var(--s));transform-origin:0 0;pointer-events:none}
+.sheet{width:1536px;height:1024px;background:#E8E7EB;display:flex;align-items:center;justify-content:center;gap:36px}
+.sheet > div{box-shadow:0 20px 40px rgba(17,16,22,.18) !important}
+.stage img.card-img{width:1536px;height:1024px;display:block}
 
 /* estados */
-.card.is-selected .card-face{box-shadow:0 0 0 3px var(--violet),0 0 30px rgba(167,139,250,.55)}
 .card.is-wrong .card-inner{animation:shake .45s ease}
-.card.is-matched .card-face{box-shadow:0 0 0 2px rgba(134,239,172,.7)}
+.card.is-matched .card-face{box-shadow:inset 0 0 0 3px rgba(134,239,172,.9)}
 .card.is-matched::after{
-  content:attr(data-badge);position:absolute;left:50%;bottom:calc(-10px);transform:translate(-50%,0);
+  content:attr(data-badge);position:absolute;left:50%;bottom:-9px;transform:translateX(-50%);
   z-index:3;background:#14532D;color:#DCFCE7;border:1px solid rgba(134,239,172,.6);
-  font-size:11px;font-weight:600;padding:3px 8px;border-radius:999px;white-space:nowrap;max-width:110%;overflow:hidden;text-overflow:ellipsis;
+  font-size:11px;font-weight:600;padding:3px 8px;border-radius:999px;white-space:nowrap;
 }
-.zoom-btn{
-  position:absolute;top:6px;right:6px;z-index:3;width:32px;height:32px;border-radius:9px;
-  border:1px solid rgba(255,255,255,.25);background:rgba(13,12,17,.75);color:#fff;cursor:zoom-in;
-  display:none;align-items:center;justify-content:center;
-}
-.card.is-up .zoom-btn{display:flex}
-.board.mode-aberto .card-inner{transition:none}
+.card.is-matched .card-hit{cursor:zoom-in}
 @keyframes shake{0%,100%{translate:0}20%{translate:-6px}40%{translate:6px}60%{translate:-4px}80%{translate:4px}}
+
+/* Contagem da memorização */
+.countdown{
+  position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:45;
+  display:flex;align-items:center;gap:16px;padding:10px 12px 10px 20px;
+  background:var(--surface-2);border:1px solid var(--line);border-radius:16px;box-shadow:0 20px 40px rgba(0,0,0,.45);
+}
+.countdown[hidden]{display:none}
+.cd-label{font-size:15px;color:#ECEAF2}
+.cd-num{font-family:'Space Grotesk',sans-serif;font-size:30px;font-weight:700;color:var(--violet);min-width:40px;text-align:center}
+.seg-label{align-self:center;padding:0 8px 0 10px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
 
 /* ---------- Sobreposições ---------- */
 .overlay{
@@ -153,15 +157,14 @@ button{font:inherit;color:inherit}
 .intro-modes{display:flex;gap:10px;flex-wrap:wrap}
 .mode-help{font-size:13px;color:var(--muted);margin:14px 0 0;line-height:1.5}
 
-.match{max-width:min(1240px,96vw);max-height:96vh;padding:24px 28px;display:flex;flex-direction:column;gap:16px}
+.match{max-width:min(1500px,96vw);max-height:96vh;padding:24px 28px;display:flex;flex-direction:column;gap:16px}
 .match-head{text-align:center}
 .match-head h2{font-family:'Space Grotesk',sans-serif;font-size:34px;margin:6px 0 4px;letter-spacing:-.5px}
 .match-head p{margin:0;color:#DCD8E6;font-size:16px}
 .match-cards{display:flex;gap:24px;justify-content:center;align-items:center}
-.big-card{width:calc(690px * var(--zs));height:calc(960px * var(--zs));border-radius:calc(34px * var(--zs));overflow:hidden;flex:none;box-shadow:0 20px 50px rgba(0,0,0,.5)}
+.big-card{width:calc(1536px * var(--zs));height:calc(1024px * var(--zs));border-radius:calc(40px * var(--zs));overflow:hidden;flex:none;box-shadow:0 20px 50px rgba(0,0,0,.5)}
 .big-card .stage{transform:scale(var(--zs))}
 .match-actions{display:flex;justify-content:center}
-.zoom-box{display:flex;flex-direction:column;align-items:center;gap:16px}
 
 @media (prefers-reduced-motion: reduce){
   .card-inner{transition:none}

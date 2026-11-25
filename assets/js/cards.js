@@ -1,4 +1,6 @@
-// Gerado a partir do canvas "Memory Game". Cada pessoa tem duas cartas: frente (pessoa) e perfil.
+// Gerado a partir do canvas "Memory Game".
+// Cada pessoa tem UMA carta (o board com as duas metades: pessoa + perfil). No jogo, cada carta aparece duas vezes.
+// front/back = HTML das duas metades; cardImg = carta inteira em imagem (1536x1024).
 window.PEOPLE = [
  {
   "id": "aline",
@@ -32,8 +34,7 @@ window.PEOPLE = [
   "id": "gabriela",
   "name": "Gabriela Agnes Custódio",
   "first": "Gabriela",
-  "frontImg": "assets/img/gabriela-frente.png",
-  "backImg": "assets/img/gabriela-perfil.png"
+  "cardImg": "assets/img/gabriela-card.jpg"
  },
  {
   "id": "geovana",
@@ -53,8 +54,7 @@ window.PEOPLE = [
   "id": "lucas",
   "name": "Lucas Ferreira Bezerra",
   "first": "Lucas",
-  "frontImg": "assets/img/lucas-frente.png",
-  "backImg": "assets/img/lucas-perfil.png"
+  "cardImg": "assets/img/lucas-card.jpg"
  },
  {
   "id": "luiza",
@@ -95,7 +95,6 @@ window.PEOPLE = [
   "id": "vinicius",
   "name": "Vinicios Henrique Ramalho",
   "first": "Vinicios",
-  "frontImg": "assets/img/vinicius-frente.png",
-  "backImg": "assets/img/vinicius-perfil.png"
+  "cardImg": "assets/img/vinicius-card.jpg"
  }
 ];

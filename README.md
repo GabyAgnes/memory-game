@@ -2,24 +2,21 @@
 
 Jogo da memória online para a dinâmica de apresentação do time de design.
 
-Cada pessoa tem um par de cartas:
+Cada pessoa do time tem **uma carta**, com as duas metades lado a lado: a metade da pessoa (foto, nome, identificação visual) e a metade do perfil profissional (missão, skills, repertório, impacto, traços e diferencial). No tabuleiro, cada carta aparece **duas vezes**: são 14 pessoas e 28 cartas.
 
-1. **Carta da pessoa**: foto, nome e uma identificação visual simples.
-2. **Carta do perfil profissional**: competências, áreas de atuação, repertório complementar, impacto e traços profissionais.
+## Como funciona
 
-O grupo tenta descobrir qual perfil pertence a qual pessoa. Quando um par é encontrado, a tela de **Par encontrado** mostra as duas cartas lado a lado e a própria pessoa apresenta o seu perfil, complementando o que está na carta.
-
-## Modos de jogo
-
-- **Clássico**: cartas viradas para baixo. Viram duas por vez; se não forem par, o grupo conversa e clica em "Virar de volta".
-- **Cartas abertas**: todas as cartas à mostra. O grupo escolhe uma pessoa e um perfil; vale a dedução.
+1. O jogo começa com **todas as cartas abertas**. O time tem 10, 20 ou 30 segundos para memorizar onde está cada uma. O tempo é escolhido no topo da tela, e o botão "Já memorizamos" encerra a contagem antes.
+2. As cartas viram para baixo. O time vira **duas por vez** e tenta formar os pares.
+3. Quando o par se forma, abre a tela **Par encontrado** com a carta em tamanho grande, e **a pessoa da carta se apresenta** para o time.
+4. Se não for par, as cartas viram de volta sozinhas.
 
 Detalhes:
 
-- A lupa amplia qualquer carta aberta.
-- Clicar num par já encontrado abre a apresentação de novo.
-- O progresso fica salvo no navegador, então recarregar a página não perde o jogo.
-- "Embaralhar" recomeça do zero.
+- Clicar numa carta já encontrada abre a apresentação de novo.
+- O placar mostra pares, tentativas e tempo.
+- O progresso fica salvo no navegador.
+- "Novo jogo" embaralha e recomeça pela memorização.
 
 ## Estrutura
 
@@ -27,7 +24,7 @@ Detalhes:
 index.html            página do jogo
 assets/css/style.css  visual
 assets/js/game.js     regras do jogo
-assets/js/cards.js    conteúdo das 14 pessoas (cartas)
+assets/js/cards.js    as 14 cartas (uma por pessoa)
 assets/img/           fotos e cartas em imagem
 vercel.json           configuração da Vercel (sem indexação em buscadores)
 ```
@@ -59,8 +56,7 @@ Na Vercel: **Add New › Project › Import** o repositório. Em *Framework Pres
 
 As cartas ficam em `assets/js/cards.js`, uma entrada por pessoa:
 
-- `front`: HTML da carta da pessoa.
-- `back`: HTML da carta de perfil.
-- `frontImg` / `backImg`: em vez do HTML, uma imagem da carta (PNG na proporção 690×960).
+- `front` + `back`: HTML das duas metades da carta.
+- `cardImg`: em vez do HTML, a carta inteira em imagem (1536×1024).
 
-Para adicionar alguém, copie uma entrada, troque `id`, `name` e `first`, e aponte para as novas cartas.
+Para adicionar alguém, copie uma entrada e troque `id`, `name` e `first`. O jogo duplica a carta sozinho.
